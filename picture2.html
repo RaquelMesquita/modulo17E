@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Gallery 1 -Picture 1</title>
+   <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+   <h1>Gallery 1</h1>
+   <div id="container">
+      <p>
+         <img src="img/picture2.jpg" alt="Picture 1">
+      </p>
+      <p class="caption">
+         Picture 2         
+      </p>
+   </div>
+   <p id="menu">
+      <a href="picture1.html">Picture 1</a>
+      <a href="picture2.html">Picture 2</a>
+      <a href="picture3.html">Picture 3</a>
+      <a href="picture4.html">Picture 4</a>
+      <a href="picture5.html">Picture 5</a>
+   </p>
+      <meta charset="utf-8">
+      <title>Exercício 10</title>
+      <script type = "text/javascript" src = "js/jquery/jquery-3.6.0.min.js"></script>
+      <script type="text/javascript">
+         var $pictures, $menu_links = $("#menu a"), $title =$("title"),$image =$("#container img"), $caption=$(".caption");
+         $.ajax({
+            url:"pictures.xml",
+            sucess: function(data){
+               $pictures=$("picture",data);
+            }
+         })
+         $menu_links.click(function(){
+            var index=$menu_links.index(this);
+            var $picture=$pictures.filter(":eq("+ index + ")");
+            $caption.text($picture.attr("caption"));
+            $image.attr("src", $picture.attr("source"));
+            $title.text("Gallery 1 - " + $picture.attr("caption"));
+            return false;
+         })
+      </script>
+</body>
+</html>
